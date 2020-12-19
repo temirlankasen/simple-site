@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web School</title>
+
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+<div id="app">
+    {% block app %}
+    {% endblock %}
+</div>
+<script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
+<script type="text/javascript">
+    var map;
+
+    DG.then(function () {
+        map = DG.map('map', {
+            center: [51.094188, 71.411771],
+            zoom: 13
+        });
+
+        DG.marker([51.094188, 71.411771]).addTo(map).bindPopup('Мы находимся здесь!');
+    });
+</script>
+<script>
+    var APP_GLOBALS = {{ app.vars|json_encode|raw }};
+    var CONTENT = {{ content|json_encode|raw }};
+</script>
+{#    <script src="{{ app.vars.hosts.static }}/vuejs/layout/root/app.js"></script>#}
+{% block js %}
+
+{% endblock %}
+</body>
+</html>
